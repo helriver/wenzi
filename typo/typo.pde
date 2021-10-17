@@ -11,17 +11,29 @@ void setup(){
 }
 
 void draw(){
+  fill(0,5);
+  rect(0,0,1000,1000);
   frameRate(8);
   float rate;
   char m;
+  float angle = atan2(mouseY - Py, mouseX - Px);
   t++;
   m = ch[(t-1)%(s.length())];
   textFont(font);
-  rate = abs(mouseX-Px)+abs(mouseY-Py);
-  textSize(map(rate,0,800,30,600));
+  rate = dist(mouseX,mouseY,Px,Py);
+  //textSize(map(rate,0,800,30,600));
+  //pushMatrix();
+  translate(mouseX,mouseY);
+  rotate(angle);
+  textSize(rate*2.5);
+  textAlign(LEFT);
   //fill(random(100,255));
   fill(map(rate,0,1200,255,0));
-  text(m, mouseX, mouseY);
+  text(m, 0, 0);
   Px = mouseX;
   Py = mouseY;
+}
+
+void keyReleased() {
+  if (keyCode == DELETE || keyCode == BACKSPACE) background(0);
 }
